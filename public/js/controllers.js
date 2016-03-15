@@ -7,7 +7,7 @@ validationApp.config(function($stateProvider, $urlRouterProvider) {
     // Define states
     .state('homeView', {
       url: "/",
-      template: "<h1>Home</h1>"
+      template: "<h4>Welcome to Whatever it is... bla bla bla</h4><br><br>"
     })
     .state('registrationView', {
       url: "/registration",
@@ -24,11 +24,11 @@ validationApp.controller("countryController", function($scope, CountryService) {
 validationApp.controller("validationController", function($scope) {
 
   $scope.submitRegistrationForm =  function(invalid) {
-    console.log('Form was submitted current state is:' + invalid);
+
   }
 
   $scope.cardChange = function() {
-    console.log('Luhn returned:' + checkLuhn($scope.user.creditcard));
+
     if (!checkLuhn($scope.user.creditcard)) {
       $scope.registrationForm.$error.luhn = true;
       $scope.registrationForm.creditcard.$error.luhn = true;
@@ -61,7 +61,6 @@ function checkLuhn(digits) {
     i--
   }
   var checkDigit = (runningTotal*9)%10
-  console.log(checkDigit + '= checkDigit checksum=' + checkSum);
 
   return checkDigit === checkSum
 }
