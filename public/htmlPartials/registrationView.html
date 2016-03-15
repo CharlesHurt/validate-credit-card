@@ -1,0 +1,69 @@
+<h3>Registering</h3>
+<form name='registrationForm' novalidate ng-submit='submitRegistrationForm(registrationForm.$invalid)'>
+Credit Card: <input name='creditcard' size='30' ng-change='cardChange()' ng-model='user.creditcard'><br><br>
+<img src="/images/Visa.png" alt="">
+<img src="/images/Mast.png" alt="">
+<img src="/images/Disc.png" alt="">
+<img src="/images/Amex.png" alt=""><br><br>
+Expiration: <select ng-model='user.expirationMonth'>
+  <option value='01'>01</option>
+  <option value='02'>02</option>
+  <option value='03'>03</option>
+  <option value='04'>04</option>
+  <option value='05'>05</option>
+  <option value='06'>06</option>
+  <option value='07'>07</option>
+  <option value='08'>08</option>
+  <option value='09'>09</option>
+  <option value='10'>10</option>
+  <option value='11'>11</option>
+  <option value='12'>12</option></select>
+Year: <select ng-model='user.expirationYear' required>
+  <option value='16'>16</option>
+  <option value='17'>17</option>
+  <option value='18'>18</option>
+  <option value='19'>19</option>
+  <option value='20'>20</option>
+  <option value='21'>21</option>
+  <option value='22'>22</option>
+  <option value='23'>23</option>
+  <option value='24'>24</option>
+  <option value='25'>25</option>
+  <option value='26'>26</option>
+ </select>
+CVV: <input type="number" size="5" minLength='3' maxLength='3' required><br><br>
+Email: <input  type="email" size="30"
+            name="myEmail"
+            ng-model="email"
+            ng-minlength="5"
+            required novalidate/><br><br>
+Password: <input type='password' required ng-model='user.password'>&nbsp;Verify Password: <input type='password' required ng-model='user.verifyPassword'><br><br>
+Country: <select name="" ng-controller='countryController'>
+  <option value="{{$index}}" ng-repeat="country in countries" >{{country}}</option>
+</select>&nbsp;&nbsp;Postal code: <input type="number" minLength='1' ng-model='user.postalCode'><br><br>
+<button ng-disabled='!registrationForm.$invalid'>Submit</button><br><br>
+{{registrationForm.creditcard | json}}
+<hr>
+{{user.creditcard | json}}
+<hr>
+<div ng-messages="registrationForm.creditcard.$error">
+
+  <br>
+  <span ng-message='required'>Credit card field is required</span><br>
+  <span ng-message='minLength'>Credit card minimum length not met</span><br>
+  <span ng-message='luhn'>Does not pass luhn</span><br>
+</div>
+</form>
+
+// Pass Luhn with 79927398713
+/*
+'American Express       34, 37            15
+'Diners Club            300 to 305, 36    14
+'Carte Blanche          38                14
+'Discover               6011              16
+'EnRoute                2014, 2149        15
+'JCB                    3                 16
+'JCB                    2131, 1800        15
+'Master Card            51 to 55          16
+'Visa                   4                 13, 16
+*/
